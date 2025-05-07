@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toddler Activities</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4b0082">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 1em;
+      padding: 1em;
+      background: #fefefe;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5em;
+      color: #4b0082;
+    }
+    ol {
+      padding-left: 1em;
+    }
+    li {
+      margin-bottom: 0.6em;
+      font-size: 1.1em;
+    }
+    button {
+      display: block;
+      margin: 2em auto 1em auto;
+      padding: 0.7em 1.5em;
+      font-size: 1em;
+      background-color: #4b0082;
+      color: white;
+      border: none;
+      border-radius: 6px;
+    }
+    button:hover {
+      background-color: #5e2d90;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>This Week’s Toddler Activities</h1>
+  <ol id="activityList"></ol>
+  <button onclick="generateActivities()">New List</button>
+
+  <script>
+    const allActivities = [
+      "Build a tower with blocks",
+      "Play with bubbles in the backyard",
+      "Read picture books together",
+      "Color with jumbo crayons",
+      "Have a teddy bear picnic",
+      "Make music with pots and wooden spoons",
+      "Do a simple animal puzzle",
+      "Water plants with a small watering can",
+      "Play hide and seek around the house",
+      "Make paper plate masks",
+      "Dance to favorite songs",
+      "Finger paint on butcher paper",
+      "Feed the birds with grandma",
+      "Play with toy cars or trains",
+      "Bake cookies with supervision",
+      "Pretend grocery shopping with toy food",
+      "Splash with measuring cups in a water bin",
+      "Go for a walk and look for flowers",
+      "Stack plastic cups into pyramids",
+      "Play with playdough and cookie cutters"
+    ];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function generateActivities() {
+      const list = document.getElementById('activityList');
+      list.innerHTML = '';
+      const activities = [...allActivities];
+      shuffle(activities);
+      activities.slice(0, 10).forEach((activity) => {
+        const li = document.createElement('li');
+        li.textContent = activity;
+        list.appendChild(li);
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+
+    window.onload = generateActivities;
+  </script>
+
+</body>
+</html>
